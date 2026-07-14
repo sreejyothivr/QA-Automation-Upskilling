@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Sanity Test Suite">
+
+    <listeners>
+        <listener class-name="testComponents.TestListener"/>
+    </listeners>
+
+    <test name="Login Test" enabled="true">
+        <classes>
+            <class name="testCases.LoginTest">
+                <methods>
+                    <include name="verifyValidLogin"/>
+
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
