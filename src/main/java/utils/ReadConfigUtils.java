@@ -29,7 +29,7 @@ public class ReadConfigUtils {
     public String getUsername() {
         return pro.getProperty("username");
     }
-
+//
     public String getPassword() {
         return pro.getProperty("password");
     }
