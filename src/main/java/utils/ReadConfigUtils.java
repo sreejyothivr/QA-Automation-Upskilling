@@ -47,7 +47,6 @@ public class ReadConfigUtils {
     }
 
     public List<String> readProduct1Details() {
-
         return List.of(
                 pro.getProperty("product1"),
                 pro.getProperty("product1Description"),
@@ -62,15 +61,12 @@ public class ReadConfigUtils {
     public String getErrorMsg() {
         return pro.getProperty("errorMsg");
     }
-
     public String getFirstName() {
         return pro.getProperty("firstName");
     }
-
     public String getLastName() {
         return pro.getProperty("lastName");
     }
-
     public String getPostalCode() {
         return pro.getProperty("zipCode");
     }
