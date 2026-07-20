@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CartPage {
 
-    private WebDriver driver;
+    private WebDriver driver;// another initialization
 
     public CartPage(WebDriver driver) {
         this.driver = driver;
