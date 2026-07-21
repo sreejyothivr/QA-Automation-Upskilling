@@ -9,12 +9,10 @@ import java.util.List;
 
 public class CartPage {
 
-    private WebDriver driver;// another initialization
+    private WebDriver driver;
 
     public CartPage(WebDriver driver) {
         this.driver = driver;
-    }// another change doing
-
-    // Locators
+    }
 
 }
