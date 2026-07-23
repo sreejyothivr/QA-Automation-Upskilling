@@ -3,10 +3,14 @@ package testComponents;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import utils.ExtentReportUtils;
+import utils.ScreenshotUtil;
+
+import java.io.IOException;
 
 public class TestListener implements ITestListener {
 
@@ -33,8 +37,17 @@ public class TestListener implements ITestListener {
     }
 
     @Override
-    public void onTestFailure(ITestResult iTestResult) {
+    public void onTestFailure(ITestResult result) {
 
-        extentTest.get().log(Status.FAIL, "Test Failed");
+        Object currentClass = result.getInstance();
+        WebDriver driver = ((BaseTest) currentClass).driver;
+
+        String path = ScreenshotUtil.captureScreenshot(
+                driver,
+                result.getMethod().getMethodName());
+
+        extentTest.get().log(Status.FAIL, result.getThrowable());
+
+        extentTest.get().addScreenCaptureFromPath(path, "Failure Screenshot");
     }
 }

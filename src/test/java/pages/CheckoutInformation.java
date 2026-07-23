@@ -9,6 +9,7 @@ public class CheckoutInformation {
     private Object drievr;
 
     public CheckoutInformation(WebDriver driver) {
+
         this.driver = driver;
     }
 
