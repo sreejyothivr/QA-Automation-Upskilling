@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class CheckoutInformation {
 
     private WebDriver driver;
-    private Object drievr;
+
 
     public CheckoutInformation(WebDriver driver) {
 
