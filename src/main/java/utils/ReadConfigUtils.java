@@ -15,7 +15,7 @@ public class ReadConfigUtils {
 
         try {
             FileInputStream fis = new FileInputStream(src);
-            pro = new Properties();
+            pro = new Properties();// properties added
             pro.load(fis);
         } catch (Exception e) {
             System.out.println(e.getMessage());
