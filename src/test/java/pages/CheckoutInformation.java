@@ -10,7 +10,7 @@ public class CheckoutInformation {
 
     public CheckoutInformation(WebDriver driver) {
 
-        this.driver = driver;// change done
+        this.driver = driver;
     }
 
 
