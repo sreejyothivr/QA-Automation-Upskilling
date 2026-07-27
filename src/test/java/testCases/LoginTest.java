@@ -35,9 +35,31 @@ public class LoginTest extends BaseTest {
         loginPage.enterUsername(readConfigUtils.getInvalidUsername());
         loginPage.enterPassword(readConfigUtils.getPassword());
         loginPage.clickLogin();
-        String errorMessage = driver.findElement(By.xpath("//h3[@data-test='error']")).getText();
-        Assert.assertEquals(errorMessage, readConfigUtils.getErrorMsg());
+        String errorMessage = driver.findElement(By.xpath("//div[contains(@class, 'error-message-container')]")).getText();
+        Assert.assertEquals(errorMessage, readConfigUtils.getErrorMsgIncorrectCredentials());
 
+    }
+
+    @Test
+    public void verifyLoginWithValidUserAndInvalidPassword() {
+        driver.get(readConfigUtils.getUrl());
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.enterUsername(readConfigUtils.getUsername());
+        loginPage.enterPassword(readConfigUtils.getInvalidPassword());
+        loginPage.clickLogin();
+        String errorMessage = driver.findElement(By.xpath("//div[contains(@class, 'error-message-container')]")).getText();
+        Assert.assertEquals(errorMessage, readConfigUtils.getErrorMsgIncorrectCredentials());
+    }
+
+    @Test
+    public void verifyLoginWithInvalidUserAndInvalidPassword() {
+        driver.get(readConfigUtils.getUrl());
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.enterUsername(readConfigUtils.getInvalidUsername());
+        loginPage.enterPassword(readConfigUtils.getInvalidPassword());
+        loginPage.clickLogin();
+        String errorMessage = driver.findElement(By.xpath("//div[contains(@class, 'error-message-container')]")).getText();
+        Assert.assertEquals(errorMessage, readConfigUtils.getErrorMsgIncorrectCredentials());
     }
 
 

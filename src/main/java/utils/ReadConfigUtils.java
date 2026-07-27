@@ -58,8 +58,16 @@ public class ReadConfigUtils {
         return pro.getProperty("inValidusername");
     }
 
+    public String getInvalidPassword() {
+        return pro.getProperty("inValidpassword");
+    }
+
+
     public String getErrorMsg() {
         return pro.getProperty("errorMsg");
+    }
+    public String getErrorMsgIncorrectCredentials() {
+        return pro.getProperty("errorMsgIncorrectCredentials");
     }
     public String getFirstName() {
         return pro.getProperty("firstName");
