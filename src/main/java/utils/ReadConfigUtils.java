@@ -68,6 +68,7 @@ public class ReadConfigUtils {
     }
     public String getErrorMsgIncorrectCredentials() {
         return pro.getProperty("errorMsgIncorrectCredentials");
+        //This is the error message
     }
     public String getFirstName() {
         return pro.getProperty("firstName");
