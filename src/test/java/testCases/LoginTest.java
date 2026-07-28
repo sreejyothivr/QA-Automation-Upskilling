@@ -1,17 +1,10 @@
 package testCases;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.ProductPage;
 import testComponents.BaseTest;
-import utils.ReadConfigUtils;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class LoginTest extends BaseTest {
 
@@ -22,10 +15,10 @@ public class LoginTest extends BaseTest {
         loginPage.enterUsername(readConfigUtils.getUsername());
         loginPage.enterPassword(readConfigUtils.getPassword());
         loginPage.clickLogin();
+
         ProductPage productPage = new ProductPage(driver);
         String title = productPage.getValuePageTitle();
         Assert.assertEquals(title, readConfigUtils.getTitle());
-
     }
 
     @Test
@@ -35,9 +28,8 @@ public class LoginTest extends BaseTest {
         loginPage.enterUsername(readConfigUtils.getInvalidUsername());
         loginPage.enterPassword(readConfigUtils.getPassword());
         loginPage.clickLogin();
-        String errorMessage = driver.findElement(By.xpath("//div[contains(@class, 'error-message-container')]")).getText();
-        Assert.assertEquals(errorMessage, readConfigUtils.getErrorMsgIncorrectCredentials());
 
+        Assert.assertEquals(loginPage.getErrorMessage(), readConfigUtils.getErrorMsgIncorrectCredentials());
     }
 
     @Test
@@ -47,8 +39,8 @@ public class LoginTest extends BaseTest {
         loginPage.enterUsername(readConfigUtils.getUsername());
         loginPage.enterPassword(readConfigUtils.getInvalidPassword());
         loginPage.clickLogin();
-        String errorMessage = driver.findElement(By.xpath("//div[contains(@class, 'error-message-container')]")).getText();
-        Assert.assertEquals(errorMessage, readConfigUtils.getErrorMsgIncorrectCredentials());
+
+        Assert.assertEquals(loginPage.getErrorMessage(), readConfigUtils.getErrorMsgIncorrectCredentials());
     }
 
     @Test
@@ -58,9 +50,7 @@ public class LoginTest extends BaseTest {
         loginPage.enterUsername(readConfigUtils.getInvalidUsername());
         loginPage.enterPassword(readConfigUtils.getInvalidPassword());
         loginPage.clickLogin();
-        String errorMessage = driver.findElement(By.xpath("//div[contains(@class, 'error-message-container')]")).getText();
-        Assert.assertEquals(errorMessage, readConfigUtils.getErrorMsgIncorrectCredentials());
+
+        Assert.assertEquals(loginPage.getErrorMessage(), readConfigUtils.getErrorMsgIncorrectCredentials());
     }
-
-
 }
