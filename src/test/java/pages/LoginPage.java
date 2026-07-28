@@ -7,13 +7,15 @@ public class LoginPage {
 
     WebDriver driver;
 
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
-    }
-
+    // Locators
     By usertextBox = By.id("user-name");
     By passwordtxt = By.id("password");
     By loginButton = By.name("login-button");
+    By errorMessageContainer = By.xpath("//div[contains(@class, 'error-message-container')]");
+
+    public LoginPage(WebDriver driver) {
+        this.driver = driver;
+    }
 
     public void enterUsername(String username) {
         driver.findElement(usertextBox).sendKeys(username);
@@ -26,5 +28,8 @@ public class LoginPage {
     public void clickLogin() {
         driver.findElement(loginButton).click();
     }
-}
 
+    public String getErrorMessage() {
+        return driver.findElement(errorMessageContainer).getText();
+    }
+}
