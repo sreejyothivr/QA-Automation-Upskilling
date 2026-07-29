@@ -12,7 +12,21 @@
             <class name="testCases.LoginTest">
                 <methods>
                     <include name="verifyValidLogin"/>
+                    <include name="verifyInValidLogin"/>
+                    <include name="verifyLoginWithValidUserAndInvalidPassword"/>
+                    <include name="verifyLoginWithInvalidUserAndInvalidPassword"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
+    <test name="Product Sort Test" enabled="true">
+        <classes>
+            <class name="testCases.ProductTest">
+                <methods>
+                    <include name="verifySortingDropdownContainsAllFourOptions"/>
+                    <include name="verifyProductsSortedByNameAToZ"/>
+                    <include name="verifyProductsSortedByNameZToA"/>
                 </methods>
             </class>
         </classes>

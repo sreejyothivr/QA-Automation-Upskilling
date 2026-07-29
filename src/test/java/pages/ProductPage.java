@@ -1,32 +1,56 @@
 package pages;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class ProductPage {
-    private WebDriver driver;
+
+    WebDriver driver;
+
+    // Locators
+    By pageTitle = By.className("title");
+    By sortDropdown = By.xpath("//select[@data-test='product-sort-container']");
+    By itemNames = By.className("inventory_item_name");
 
     public ProductPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    By productTitle = By.xpath("//span[@data-test='title']");
-
-
-
+    // Get page header title
     public String getValuePageTitle() {
-        return driver.findElement(productTitle).getText();
+        return driver.findElement(pageTitle).getText();
     }
 
+    // Get all option texts from the sorting dropdown
+    public List<String> getSortDropdownOptionsText() {
+        Select select = new Select(driver.findElement(sortDropdown));
+        List<WebElement> options = select.getOptions();
+        List<String> optionTexts = new ArrayList<>();
 
+        for (WebElement option : options) {
+            optionTexts.add(option.getText());
+        }
+        return optionTexts;
+    }
+
+    // Select a sort option by visible text
+    public void selectSortOption(String visibleText) {
+        Select select = new Select(driver.findElement(sortDropdown));
+        select.selectByVisibleText(visibleText);
+    }
+
+    // Get product names currently displayed on the UI
+    public List<String> getProductNames() {
+        List<WebElement> nameElements = driver.findElements(itemNames);
+        List<String> names = new ArrayList<>();
+
+        for (WebElement element : nameElements) {
+            names.add(element.getText());
+        }
+        return names;
+    }
 }
-
