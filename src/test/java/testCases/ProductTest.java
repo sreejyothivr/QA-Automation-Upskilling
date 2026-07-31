@@ -28,7 +28,8 @@ public class ProductTest extends BaseTest {
                 .map(String::trim)
                 .toList();
 
-        Assert.assertEquals(sortingOptions, expected, readConfigUtils.getTc10SortingOptionsErrorMsg());
+        Assert.assertEquals(sortingOptions, expected,
+                "Sorting dropdown options do not match expected list.");
     }
 
     @Test
@@ -48,14 +49,14 @@ public class ProductTest extends BaseTest {
                 .sorted()
                 .toList();
         softAssert.assertEquals(actualAscendingNames, expectedAscendingNames,
-                readConfigUtils.getTc11AscendingSortErrorMsg());
+                "Products are not sorted by Name (A to Z) in Ascending order.");
 
         productPage.sort("Descending");
         List<String> actualDescendingNames = productPage.getProductNames();
         List<String> expectedDescendingNames = new ArrayList<>(actualDescendingNames);
         expectedDescendingNames.sort(Collections.reverseOrder());
         softAssert.assertEquals(actualDescendingNames, expectedDescendingNames,
-                readConfigUtils.getTc12DescendingSortErrorMsg());
+                "Products are not sorted by Name (Z to A) in Descending order.");
 
         softAssert.assertAll();
     }
