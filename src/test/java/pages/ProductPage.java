@@ -15,7 +15,6 @@ public class ProductPage {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    // Locators
     private By pageTitle = By.className("title");
     private By sortDropdown = By.className("product_sort_container");
     private By productNames = By.className("inventory_item_name");
@@ -25,16 +24,10 @@ public class ProductPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
-    /**
-     * Gets the page title text (e.g., "Products")
-     */
     public String getValuePageTitle() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(pageTitle)).getText();
     }
 
-    /**
-     * Retrieves all visible options from the sorting dropdown as a list of Strings.
-     */
     public List<String> getSortingOptions() {
         WebElement dropdownElement = wait.until(ExpectedConditions.visibilityOfElementLocated(sortDropdown));
         Select select = new Select(dropdownElement);
@@ -44,11 +37,6 @@ public class ProductPage {
                 .toList();
     }
 
-    /**
-     * Selects the sorting option based on sortOrder.
-     *
-     * @param sortOrder "Ascending" or "Descending"
-     */
     public void sort(String sortOrder) {
         WebElement dropdownElement = wait.until(ExpectedConditions.visibilityOfElementLocated(sortDropdown));
         Select select = new Select(dropdownElement);
@@ -63,10 +51,6 @@ public class ProductPage {
             throw new IllegalArgumentException("Invalid sort order: " + sortOrder);
         }
     }
-
-    /**
-     * Helper method to fetch all product name texts currently displayed on the UI.
-     */
     public List<String> getProductNames() {
         return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(productNames))
                 .stream()

@@ -42,7 +42,6 @@ public class ProductTest extends BaseTest {
         ProductPage productPage = new ProductPage(driver);
         SoftAssert softAssert = new SoftAssert();
 
-        // TC_11: Verify products are sorted by Name (A to Z)
         productPage.sort("Ascending");
         List<String> actualAscendingNames = productPage.getProductNames();
         List<String> expectedAscendingNames = actualAscendingNames.stream()
@@ -51,7 +50,6 @@ public class ProductTest extends BaseTest {
         softAssert.assertEquals(actualAscendingNames, expectedAscendingNames,
                 readConfigUtils.getTc11AscendingSortErrorMsg());
 
-        // TC_12: Verify products are sorted by Name (Z to A)
         productPage.sort("Descending");
         List<String> actualDescendingNames = productPage.getProductNames();
         List<String> expectedDescendingNames = new ArrayList<>(actualDescendingNames);
