@@ -70,6 +70,17 @@ public class ReadConfigUtils {
         return pro.getProperty("errorMsgIncorrectCredentials");
         //This is the error message
     }
+    public String getTc10SortingOptionsErrorMsg() {
+        return pro.getProperty("tc10SortingOptionsErrorMsg");
+    }
+
+    public String getTc11AscendingSortErrorMsg() {
+        return pro.getProperty("tc11AscendingSortErrorMsg");
+    }
+
+    public String getTc12DescendingSortErrorMsg() {
+        return pro.getProperty("tc12DescendingSortErrorMsg");
+    }
     public String getFirstName() {
         return pro.getProperty("firstName");
     }

@@ -1,56 +1,76 @@
 package pages;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+import java.util.List;
 
 public class ProductPage {
 
-    WebDriver driver;
+    private WebDriver driver;
+    private WebDriverWait wait;
 
     // Locators
-    By pageTitle = By.className("title");
-    By sortDropdown = By.xpath("//select[@data-test='product-sort-container']");
-    By itemNames = By.className("inventory_item_name");
+    private By pageTitle = By.className("title");
+    private By sortDropdown = By.className("product_sort_container");
+    private By productNames = By.className("inventory_item_name");
 
     public ProductPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
-    // Get page header title
+    /**
+     * Gets the page title text (e.g., "Products")
+     */
     public String getValuePageTitle() {
-        return driver.findElement(pageTitle).getText();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(pageTitle)).getText();
     }
 
-    // Get all option texts from the sorting dropdown
-    public List<String> getSortDropdownOptionsText() {
-        Select select = new Select(driver.findElement(sortDropdown));
-        List<WebElement> options = select.getOptions();
-        List<String> optionTexts = new ArrayList<>();
+    /**
+     * Retrieves all visible options from the sorting dropdown as a list of Strings.
+     */
+    public List<String> getSortingOptions() {
+        WebElement dropdownElement = wait.until(ExpectedConditions.visibilityOfElementLocated(sortDropdown));
+        Select select = new Select(dropdownElement);
 
-        for (WebElement option : options) {
-            optionTexts.add(option.getText());
+        return select.getOptions().stream()
+                .map(WebElement::getText)
+                .toList();
+    }
+
+    /**
+     * Selects the sorting option based on sortOrder.
+     *
+     * @param sortOrder "Ascending" or "Descending"
+     */
+    public void sort(String sortOrder) {
+        WebElement dropdownElement = wait.until(ExpectedConditions.visibilityOfElementLocated(sortDropdown));
+        Select select = new Select(dropdownElement);
+
+        if ("Ascending".equalsIgnoreCase(sortOrder)) {
+            select.selectByVisibleText("Name (A to Z)");
         }
-        return optionTexts;
+        else if ("Descending".equalsIgnoreCase(sortOrder)) {
+            select.selectByVisibleText("Name (Z to A)");
+        }
+        else {
+            throw new IllegalArgumentException("Invalid sort order: " + sortOrder);
+        }
     }
 
-    // Select a sort option by visible text
-    public void selectSortOption(String visibleText) {
-        Select select = new Select(driver.findElement(sortDropdown));
-        select.selectByVisibleText(visibleText);
-    }
-
-    // Get product names currently displayed on the UI
+    /**
+     * Helper method to fetch all product name texts currently displayed on the UI.
+     */
     public List<String> getProductNames() {
-        List<WebElement> nameElements = driver.findElements(itemNames);
-        List<String> names = new ArrayList<>();
-
-        for (WebElement element : nameElements) {
-            names.add(element.getText());
-        }
-        return names;
+        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(productNames))
+                .stream()
+                .map(WebElement::getText)
+                .toList();
     }
 }
