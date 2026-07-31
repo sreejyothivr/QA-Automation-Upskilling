@@ -10,12 +10,11 @@ public class ReadConfigUtils {
     Properties pro;
 
     public ReadConfigUtils() {
-
         File src = new File(System.getProperty("user.dir") + "/src/main/resources/config.properties");
 
         try {
             FileInputStream fis = new FileInputStream(src);
-            pro = new Properties();// properties added
+            pro = new Properties();
             pro.load(fis);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -62,20 +61,22 @@ public class ReadConfigUtils {
         return pro.getProperty("inValidpassword");
     }
 
-
     public String getErrorMsg() {
         return pro.getProperty("errorMsg");
     }
+
     public String getErrorMsgIncorrectCredentials() {
         return pro.getProperty("errorMsgIncorrectCredentials");
-        //This is the error message
     }
+
     public String getFirstName() {
         return pro.getProperty("firstName");
     }
+
     public String getLastName() {
         return pro.getProperty("lastName");
     }
+
     public String getPostalCode() {
         return pro.getProperty("zipCode");
     }
@@ -95,12 +96,4 @@ public class ReadConfigUtils {
     public String getCheckoutOverviewTitle() {
         return pro.getProperty("checkoutOverviewTitle");
     }
-
 }
-
-
-
-
-
-
-
