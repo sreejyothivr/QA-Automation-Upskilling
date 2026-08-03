@@ -37,4 +37,27 @@ public class LoginTest extends BaseTest {
         loginPage.userLogin(readConfigUtils.getInvalidUsername(),readConfigUtils.getInvalidPassword());
         Assert.assertEquals(loginPage.getErrorMessage(), readConfigUtils.getErrorMsgIncorrectCredentials());
     }
+    @Test
+    public void verifyLoginWithEmptyUsernameAndPassword()
+    {
+        driver.get(readConfigUtils.getUrl());
+
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.clickLogin();
+
+        Assert.assertEquals(loginPage.getErrorMessage(), readConfigUtils.getEmptyCredentialsError());
+    }
+    @Test
+    public void verifyUsernameAndPasswordPlaceholders()
+    {
+        driver.get(readConfigUtils.getUrl());
+
+        LoginPage loginPage = new LoginPage(driver);
+
+        Assert.assertEquals(loginPage.getUsernamePlaceholder(), readConfigUtils.getUsernamePlaceholder());
+
+        Assert.assertEquals(loginPage.getPasswordPlaceholder(), readConfigUtils.getPasswordPlaceholder());
+    }
+
 }
