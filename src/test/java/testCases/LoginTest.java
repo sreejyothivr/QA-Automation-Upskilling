@@ -10,7 +10,6 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void verifyValidLogin() {
-
         LoginPage loginPage = new LoginPage(driver);
         loginPage.userLogin(readConfigUtils.getUsername(),readConfigUtils.getPassword());
         ProductPage productPage = new ProductPage(driver);
@@ -20,7 +19,6 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void verifyInValidLogin() {
-
         LoginPage loginPage = new LoginPage(driver);
         loginPage.userLogin(readConfigUtils.getInvalidUsername(),readConfigUtils.getPassword());
         Assert.assertEquals(loginPage.getErrorMessage(), readConfigUtils.getErrorMsgIncorrectCredentials());
@@ -36,7 +34,7 @@ public class LoginTest extends BaseTest {
     @Test
     public void verifyLoginWithInvalidUserAndInvalidPassword() {
         LoginPage loginPage = new LoginPage(driver);
-       loginPage.userLogin(readConfigUtils.getInvalidUsername(),readConfigUtils.getInvalidPassword());
+        loginPage.userLogin(readConfigUtils.getInvalidUsername(),readConfigUtils.getInvalidPassword());
         Assert.assertEquals(loginPage.getErrorMessage(), readConfigUtils.getErrorMsgIncorrectCredentials());
     }
 }
