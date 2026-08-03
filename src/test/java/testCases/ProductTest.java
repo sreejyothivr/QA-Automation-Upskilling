@@ -15,7 +15,6 @@ public class ProductTest extends BaseTest {
 
     @Test
     public void verifySortingField() {
-
         LoginPage loginPage = new LoginPage(driver);
         loginPage.userLogin(readConfigUtils.getUsername(),readConfigUtils.getPassword());
         ProductPage productPage = new ProductPage(driver);
@@ -31,7 +30,6 @@ public class ProductTest extends BaseTest {
 
     @Test
     public void verifySortingOptions() {
-
         LoginPage loginPage = new LoginPage(driver);
         loginPage.userLogin(readConfigUtils.getUsername(),readConfigUtils.getPassword());
         ProductPage productPage = new ProductPage(driver);
