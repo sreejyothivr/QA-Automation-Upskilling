@@ -20,9 +20,7 @@ public class ProductTest extends BaseTest {
         loginPage.enterUsername(readConfigUtils.getUsername());
         loginPage.enterPassword(readConfigUtils.getPassword());
         loginPage.clickLogin();
-
         ProductPage productPage = new ProductPage(driver);
-
         List<String> sortingOptions = productPage.getSortingOptions();
         List<String> expected = Arrays.stream(readConfigUtils.getSortingOption().split(","))
                 .map(String::trim)
@@ -30,7 +28,6 @@ public class ProductTest extends BaseTest {
 
         Assert.assertEquals(sortingOptions, expected,
                 "Sorting dropdown options do not match expected list.");
-
     }
 
     @Test
