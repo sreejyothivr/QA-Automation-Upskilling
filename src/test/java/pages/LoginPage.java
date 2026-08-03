@@ -21,6 +21,15 @@ public class LoginPage {
         driver.findElement(usertextBox).sendKeys(username);
     }
 
+    public void userLogin(String userName,String passWord)
+    {
+        enterUsername(userName);
+        enterPassword(passWord);
+        clickLogin();
+    }
+
+
+
     public void enterPassword(String password) {
         driver.findElement(passwordtxt).sendKeys(password);
     }

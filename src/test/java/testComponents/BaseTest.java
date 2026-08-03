@@ -18,6 +18,7 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(10));
         driver.manage().window().maximize();
         readConfigUtils = new ReadConfigUtils();
+        driver.get(readConfigUtils.getUrl());
     }
     @AfterMethod
     public void teardown() {
