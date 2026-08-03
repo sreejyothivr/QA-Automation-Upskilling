@@ -26,6 +26,7 @@ public class ProductTest extends BaseTest {
 
         Assert.assertEquals(sortingOptions, expected,
                 "Sorting dropdown options do not match expected list.");
+
     }
 
     @Test
