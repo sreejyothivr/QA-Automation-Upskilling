@@ -20,7 +20,7 @@
         </classes>
     </test>
 
-    <test name="Product Sort Test">
+    <test name="Product Test">
         <classes>
             <class name="testCases.ProductTest">
                 <methods>

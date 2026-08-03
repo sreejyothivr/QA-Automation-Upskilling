@@ -10,12 +10,9 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void verifyValidLogin() {
-        driver.get(readConfigUtils.getUrl());
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.enterUsername(readConfigUtils.getUsername());
-        loginPage.enterPassword(readConfigUtils.getPassword());
-        loginPage.clickLogin();
 
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.userLogin(readConfigUtils.getUsername(),readConfigUtils.getPassword());
         ProductPage productPage = new ProductPage(driver);
         String title = productPage.getValuePageTitle();
         Assert.assertEquals(title, readConfigUtils.getTitle());
@@ -23,34 +20,23 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void verifyInValidLogin() {
-        driver.get(readConfigUtils.getUrl());
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.enterUsername(readConfigUtils.getInvalidUsername());
-        loginPage.enterPassword(readConfigUtils.getPassword());
-        loginPage.clickLogin();
 
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.userLogin(readConfigUtils.getInvalidUsername(),readConfigUtils.getPassword());
         Assert.assertEquals(loginPage.getErrorMessage(), readConfigUtils.getErrorMsgIncorrectCredentials());
     }
 
     @Test
     public void verifyLoginWithValidUserAndInvalidPassword() {
-        driver.get(readConfigUtils.getUrl());
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.enterUsername(readConfigUtils.getUsername());
-        loginPage.enterPassword(readConfigUtils.getInvalidPassword());
-        loginPage.clickLogin();
-
+        loginPage.userLogin(readConfigUtils.getUsername(),readConfigUtils.getInvalidPassword());
         Assert.assertEquals(loginPage.getErrorMessage(), readConfigUtils.getErrorMsgIncorrectCredentials());
     }
 
     @Test
     public void verifyLoginWithInvalidUserAndInvalidPassword() {
-        driver.get(readConfigUtils.getUrl());
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.enterUsername(readConfigUtils.getInvalidUsername());
-        loginPage.enterPassword(readConfigUtils.getInvalidPassword());
-        loginPage.clickLogin();
-
+       loginPage.userLogin(readConfigUtils.getInvalidUsername(),readConfigUtils.getInvalidPassword());
         Assert.assertEquals(loginPage.getErrorMessage(), readConfigUtils.getErrorMsgIncorrectCredentials());
     }
 }
