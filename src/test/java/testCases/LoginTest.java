@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.ProductPage;
 import testComponents.BaseTest;
+import org.testng.asserts.SoftAssert;
+
 
 public class LoginTest extends BaseTest {
 
@@ -48,16 +50,20 @@ public class LoginTest extends BaseTest {
 
         Assert.assertEquals(loginPage.getErrorMessage(), readConfigUtils.getEmptyCredentialsError());
     }
+
     @Test
-    public void verifyUsernameAndPasswordPlaceholders()
-    {
+    public void verifyUsernameAndPasswordPlaceholders() {
+
+        SoftAssert softAssert = new SoftAssert();
+
         driver.get(readConfigUtils.getUrl());
 
         LoginPage loginPage = new LoginPage(driver);
 
-        Assert.assertEquals(loginPage.getUsernamePlaceholder(), readConfigUtils.getUsernamePlaceholder());
+        softAssert.assertEquals(loginPage.getUsernamePlaceholder(), readConfigUtils.getUsernamePlaceholder(), "Username placeholder mismatch");
 
-        Assert.assertEquals(loginPage.getPasswordPlaceholder(), readConfigUtils.getPasswordPlaceholder());
+        softAssert.assertEquals(loginPage.getPasswordPlaceholder(), readConfigUtils.getPasswordPlaceholder(), "Password placeholder mismatch");
+
+        softAssert.assertAll();
     }
-
 }
