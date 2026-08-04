@@ -45,9 +45,7 @@ public class LoginTest extends BaseTest {
         driver.get(readConfigUtils.getUrl());
 
         LoginPage loginPage = new LoginPage(driver);
-
         loginPage.clickLogin();
-
         Assert.assertEquals(loginPage.getErrorMessage(), readConfigUtils.getEmptyCredentialsError());
     }
 
@@ -59,9 +57,7 @@ public class LoginTest extends BaseTest {
         driver.get(readConfigUtils.getUrl());
 
         LoginPage loginPage = new LoginPage(driver);
-
         softAssert.assertEquals(loginPage.getUsernamePlaceholder(), readConfigUtils.getUsernamePlaceholder(), "Username placeholder mismatch");
-
         softAssert.assertEquals(loginPage.getPasswordPlaceholder(), readConfigUtils.getPasswordPlaceholder(), "Password placeholder mismatch");
         softAssert.assertAll();
     }
