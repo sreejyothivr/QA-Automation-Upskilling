@@ -63,7 +63,6 @@ public class LoginTest extends BaseTest {
         softAssert.assertEquals(loginPage.getUsernamePlaceholder(), readConfigUtils.getUsernamePlaceholder(), "Username placeholder mismatch");
 
         softAssert.assertEquals(loginPage.getPasswordPlaceholder(), readConfigUtils.getPasswordPlaceholder(), "Password placeholder mismatch");
-
         softAssert.assertAll();
     }
 }
