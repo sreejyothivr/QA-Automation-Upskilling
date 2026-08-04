@@ -26,6 +26,8 @@
                 <methods>
                     <include name="verifySortingField"/>
                     <include name="verifySortingOptions"/>
+                    <include name="verifySideNavigationMenu"/>
+                    <include name="verifyAllItemsNavigation"/>
                 </methods>
             </class>
         </classes>
