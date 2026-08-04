@@ -96,4 +96,10 @@ public class ReadConfigUtils {
     public String getCheckoutOverviewTitle() {
         return pro.getProperty("checkoutOverviewTitle");
     }
+
+    public String getEmptyCredentialsError() {return pro.getProperty("emptyCredentialsError");}
+
+    public String getUsernamePlaceholder() {return pro.getProperty("usernamePlaceholder");}
+
+    public String getPasswordPlaceholder() {return pro.getProperty("passwordPlaceholder");}
 }
