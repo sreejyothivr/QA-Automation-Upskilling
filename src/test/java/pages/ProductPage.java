@@ -18,6 +18,7 @@ public class ProductPage {
     private By pageTitle = By.className("title");
     private By sortDropdown = By.className("product_sort_container");
     private By productNames = By.className("inventory_item_name");
+    private By productPrices = By.className("inventory_item_price");
 
     public ProductPage(WebDriver driver) {
         this.driver = driver;
@@ -47,6 +48,12 @@ public class ProductPage {
         else if ("Descending".equalsIgnoreCase(sortOrder)) {
             select.selectByVisibleText("Name (Z to A)");
         }
+        else if ("Price Low to High".equalsIgnoreCase(sortOrder)){
+            select.selectByVisibleText("Price (low to high)");
+        }
+        else if ("Price High to Low".equalsIgnoreCase(sortOrder)){
+            select.selectByVisibleText("Price (high to low)");
+        }
         else {
             throw new IllegalArgumentException("Invalid sort order: " + sortOrder);
         }
@@ -56,5 +63,14 @@ public class ProductPage {
                 .stream()
                 .map(WebElement::getText)
                 .toList();
+    }
+    public List<Double> getProductPrices(){
+        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(productPrices))
+                .stream()
+                .map(WebElement::getText)
+                .map(price -> price.replaceAll("[^0-9.]", ""))
+                .map(Double::parseDouble)
+                .toList();
+
     }
 }
