@@ -37,9 +37,9 @@ public class ReadConfigUtils {
         return pro.getProperty("productPageTitle");
     }
 
-    public String getSortingOption() {
-        return pro.getProperty("sortingOptions");
-    }
+    public String getSortingOption() { return pro.getProperty("sortingOptions"); }
+
+    public String getMenuOptions() { return pro.getProperty("menuOptions"); }
 
     public String readProduct1() {
         return pro.getProperty("product1");

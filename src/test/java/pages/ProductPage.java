@@ -20,11 +20,9 @@ public class ProductPage {
     private By productPrices = By.className("inventory_item_price");
     private By hamburgerMenu = By.id("react-burger-menu-btn");
     private By sideMenu = By.className("bm-menu-wrap");
-
+    private By menuOptions = By.cssSelector(".bm-item.menu-item");
     private By allItems = By.id("inventory_sidebar_link");
-    private By about = By.id("about_sidebar_link");
-    private By logout = By.id("logout_sidebar_link");
-    private By resetAppState = By.id("reset_sidebar_link");
+
     public ProductPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -85,24 +83,18 @@ public class ProductPage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(sideMenu))
                 .isDisplayed();
     }
-    public boolean isAllItemsDisplayed() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(allItems))
-                .isDisplayed();
-    }
-    public boolean isAboutDisplayed() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(about))
-                .isDisplayed();
+
+    public List<String> getSideMenuOptions() {
+
+        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(menuOptions))
+                .stream()
+                .map(WebElement::getText)
+                .toList();
     }
 
-    public boolean isLogoutDisplayed() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(logout))
-                .isDisplayed();
-    }
 
-    public boolean isResetAppStateDisplayed() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(resetAppState))
-                .isDisplayed();
-    }
+
+
     public void clickAllItems() {
         wait.until(ExpectedConditions.elementToBeClickable(allItems)).click();
     }

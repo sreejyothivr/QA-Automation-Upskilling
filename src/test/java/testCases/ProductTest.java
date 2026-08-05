@@ -61,20 +61,24 @@ public class ProductTest extends BaseTest {
 
         SoftAssert softAssert = new SoftAssert();
 
-        softAssert.assertTrue(productPage.isSideMenuDisplayed(),
-                "Side Navigation Menu is not displayed.");
+        softAssert.assertTrue(
+                productPage.isSideMenuDisplayed(),
+                "Side Navigation Menu is not displayed."
+        );
 
-        softAssert.assertTrue(productPage.isAllItemsDisplayed(),
-                "'All Items' option is not displayed.");
+        List<String> actualOptions = productPage.getSideMenuOptions();
 
-        softAssert.assertTrue(productPage.isAboutDisplayed(),
-                "'About' option is not displayed.");
+        List<String> expectedOptions = Arrays.stream(
+                        readConfigUtils.getMenuOptions().split(","))
+                .map(String::trim)
+                .toList();
 
-        softAssert.assertTrue(productPage.isLogoutDisplayed(),
-                "'Logout' option is not displayed.");
 
-        softAssert.assertTrue(productPage.isResetAppStateDisplayed(),
-                "'Reset App State' option is not displayed.");
+        softAssert.assertEquals(
+                actualOptions,
+                expectedOptions,
+                "Side menu options are incorrect."
+        );
 
         softAssert.assertAll();
     }
