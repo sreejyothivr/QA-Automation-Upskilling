@@ -50,7 +50,7 @@ public class ProductTest extends BaseTest {
         softAssert.assertAll();
     }
     @Test
-    public void verifySideNavigationMenu() {
+    public void verifyHamburgerNavigationMenu() {
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.userLogin(readConfigUtils.getUsername(), readConfigUtils.getPassword());
@@ -83,7 +83,7 @@ public class ProductTest extends BaseTest {
         softAssert.assertAll();
     }
     @Test
-    public void verifyAllItemsNavigation() {
+    public void verifyAllItemsNavigationToProductsPage() {
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.userLogin(readConfigUtils.getUsername(), readConfigUtils.getPassword());
