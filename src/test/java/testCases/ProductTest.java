@@ -15,14 +15,9 @@ public class ProductTest extends BaseTest {
 
     @Test
     public void verifySortingField() {
-        driver.get(readConfigUtils.getUrl());
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.enterUsername(readConfigUtils.getUsername());
-        loginPage.enterPassword(readConfigUtils.getPassword());
-        loginPage.clickLogin();
-
+        loginPage.userLogin(readConfigUtils.getUsername(),readConfigUtils.getPassword());
         ProductPage productPage = new ProductPage(driver);
-
         List<String> sortingOptions = productPage.getSortingOptions();
         List<String> expected = Arrays.stream(readConfigUtils.getSortingOption().split(","))
                 .map(String::trim)
@@ -30,6 +25,7 @@ public class ProductTest extends BaseTest {
 
         Assert.assertEquals(sortingOptions, expected,
                 "Sorting dropdown options do not match expected list.");
+
     }
 
     @Test
