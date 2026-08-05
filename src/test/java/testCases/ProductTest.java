@@ -34,21 +34,19 @@ public class ProductTest extends BaseTest {
         loginPage.userLogin(readConfigUtils.getUsername(),readConfigUtils.getPassword());
         ProductPage productPage = new ProductPage(driver);
         SoftAssert softAssert = new SoftAssert();
-        productPage.sort("Ascending");
-        List<String> actualAscendingNames = productPage.getProductNames();
-        List<String> expectedAscendingNames = actualAscendingNames.stream()
+        List<String> originalNames = productPage.getProductNames();
+        List<String> expectedAscending = originalNames.stream()
                 .sorted()
                 .toList();
-        softAssert.assertEquals(actualAscendingNames, expectedAscendingNames,
-                "Products are not sorted by Name (A to Z) in Ascending order.");
-
+        productPage.sort("Ascending");
+        List<String> actualAscending = productPage.getProductNames();
+        softAssert.assertEquals(actualAscending, expectedAscending);
+        List<String> expectedDescending = originalNames.stream()
+                .sorted(Collections.reverseOrder())
+                .toList();
         productPage.sort("Descending");
-        List<String> actualDescendingNames = productPage.getProductNames();
-        List<String> expectedDescendingNames = new ArrayList<>(actualDescendingNames);
-        expectedDescendingNames.sort(Collections.reverseOrder());
-        softAssert.assertEquals(actualDescendingNames, expectedDescendingNames,
-                "Products are not sorted by Name (Z to A) in Descending order.");
-
+        List<String> actualDescending = productPage.getProductNames();
+        softAssert.assertEquals(actualDescending, expectedDescending);
         softAssert.assertAll();
     }
     @Test

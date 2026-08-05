@@ -41,4 +41,8 @@ public class LoginPage {
     public String getErrorMessage() {
         return driver.findElement(errorMessageContainer).getText();
     }
+
+    public String getUsernamePlaceholder() {return driver.findElement(usertextBox).getAttribute("placeholder");}
+
+    public String getPasswordPlaceholder() {return driver.findElement(passwordtxt).getAttribute("placeholder");}
 }
