@@ -49,4 +49,55 @@ public class ProductTest extends BaseTest {
         softAssert.assertEquals(actualDescending, expectedDescending);
         softAssert.assertAll();
     }
+    @Test
+    public void verifyHamburgerNavigationMenu() {
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.userLogin(readConfigUtils.getUsername(), readConfigUtils.getPassword());
+
+        ProductPage productPage = new ProductPage(driver);
+
+        productPage.clickHamburgerMenu();
+
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertTrue(
+                productPage.isSideMenuDisplayed(),
+                "Side Navigation Menu is not displayed."
+        );
+
+        List<String> actualOptions = productPage.getSideMenuOptions();
+
+        List<String> expectedOptions = Arrays.stream(
+                        readConfigUtils.getMenuOptions().split(","))
+                .map(String::trim)
+                .toList();
+
+
+        softAssert.assertEquals(
+                actualOptions,
+                expectedOptions,
+                "Side menu options are incorrect."
+        );
+
+        softAssert.assertAll();
+    }
+    @Test
+    public void verifyAllItemsNavigationToProductsPage() {
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.userLogin(readConfigUtils.getUsername(), readConfigUtils.getPassword());
+
+        ProductPage productPage = new ProductPage(driver);
+
+        productPage.clickHamburgerMenu();
+
+        productPage.clickAllItems();
+
+        Assert.assertEquals(
+                productPage.getValuePageTitle(),
+                "Products",
+                "Navigation to Products page failed."
+        );
+    }
 }

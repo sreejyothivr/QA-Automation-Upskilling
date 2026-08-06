@@ -5,9 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+ import java.time.Duration;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.List;
 
 public class ProductPage {
@@ -19,6 +18,10 @@ public class ProductPage {
     private By sortDropdown = By.className("product_sort_container");
     private By productNames = By.className("inventory_item_name");
     private By productPrices = By.className("inventory_item_price");
+    private By hamburgerMenu = By.id("react-burger-menu-btn");
+    private By sideMenu = By.className("bm-menu-wrap");
+    private By menuOptions = By.cssSelector(".bm-item.menu-item");
+    private By allItems = By.id("inventory_sidebar_link");
 
     public ProductPage(WebDriver driver) {
         this.driver = driver;
@@ -72,5 +75,27 @@ public class ProductPage {
                 .map(Double::parseDouble)
                 .toList();
 
+    }
+    public void clickHamburgerMenu() {
+        wait.until(ExpectedConditions.elementToBeClickable(hamburgerMenu)).click();
+    }
+    public boolean isSideMenuDisplayed() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(sideMenu))
+                .isDisplayed();
+    }
+
+    public List<String> getSideMenuOptions() {
+
+        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(menuOptions))
+                .stream()
+                .map(WebElement::getText)
+                .toList();
+    }
+
+
+
+
+    public void clickAllItems() {
+        wait.until(ExpectedConditions.elementToBeClickable(allItems)).click();
     }
 }

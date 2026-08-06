@@ -28,6 +28,8 @@
                 <methods>
                     <include name="verifySortingField"/>
                     <include name="verifySortingOptions"/>
+                    <include name="verifyHamburgerNavigationMenu"/>
+                    <include name="verifyAllItemsNavigationToProductsPage"/>
                 </methods>
             </class>
         </classes>
