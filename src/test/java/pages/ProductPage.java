@@ -24,6 +24,7 @@ public class ProductPage {
     private By allItems = By.id("inventory_sidebar_link");
     private By menuButton = By.id("react-burger-menu-btn");
     private By closeButton = By.id("react-burger-cross-btn");
+    private By logoutButton = By.id("logout_sidebar_link");
 
     public ProductPage(WebDriver driver) {
         this.driver = driver;
@@ -94,9 +95,6 @@ public class ProductPage {
                 .toList();
     }
 
-
-
-
     public void clickAllItems() {
         wait.until(ExpectedConditions.elementToBeClickable(allItems)).click();
     }
@@ -114,5 +112,8 @@ public class ProductPage {
     }
     public boolean isMenuClosed() {
         return wait.until(ExpectedConditions.attributeToBe(sideMenu, "aria-hidden", "true"));
+    }
+    public void clickLogout() {
+        wait.until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
     }
 }
