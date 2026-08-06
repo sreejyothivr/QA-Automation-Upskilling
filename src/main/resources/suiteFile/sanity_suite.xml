@@ -30,6 +30,7 @@
                     <include name="verifySortingOptions"/>
                     <include name="verifyHamburgerNavigationMenu"/>
                     <include name="verifyAllItemsNavigationToProductsPage"/>
+                    <include name="verifyCloseButtonFunctionality"/>
                 </methods>
             </class>
         </classes>
