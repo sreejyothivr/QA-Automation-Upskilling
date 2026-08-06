@@ -100,4 +100,20 @@ public class ProductTest extends BaseTest {
                 "Navigation to Products page failed."
         );
     }
+    @Test
+    public void verifyCloseButtonFunctionality() {
+
+        SoftAssert softAssert = new SoftAssert();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.userLogin(readConfigUtils.getUsername(),readConfigUtils.getPassword());
+
+        ProductPage productPage = new ProductPage(driver);
+        productPage.clickMenuButton();
+
+        softAssert.assertTrue(productPage.isCloseButtonDisplayed());
+        productPage.clickCloseButton();
+
+        softAssert.assertTrue(productPage.isMenuClosed());
+        softAssert.assertAll();
+    }
 }

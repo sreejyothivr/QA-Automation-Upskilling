@@ -22,6 +22,8 @@ public class ProductPage {
     private By sideMenu = By.className("bm-menu-wrap");
     private By menuOptions = By.cssSelector(".bm-item.menu-item");
     private By allItems = By.id("inventory_sidebar_link");
+    private By menuButton = By.id("react-burger-menu-btn");
+    private By closeButton = By.id("react-burger-cross-btn");
 
     public ProductPage(WebDriver driver) {
         this.driver = driver;
@@ -97,5 +99,20 @@ public class ProductPage {
 
     public void clickAllItems() {
         wait.until(ExpectedConditions.elementToBeClickable(allItems)).click();
+    }
+
+    public void clickMenuButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
+    }
+    public boolean isCloseButtonDisplayed() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(closeButton)).isDisplayed();
+    }
+    public void clickCloseButton() {
+        WebElement close =
+                wait.until(ExpectedConditions.elementToBeClickable(closeButton));
+        close.click();
+    }
+    public boolean isMenuClosed() {
+        return wait.until(ExpectedConditions.attributeToBe(sideMenu, "aria-hidden", "true"));
     }
 }
