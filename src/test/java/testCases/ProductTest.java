@@ -48,6 +48,15 @@ public class ProductTest extends BaseTest {
         List<String> actualDescending = productPage.getProductNames();
         softAssert.assertEquals(actualDescending, expectedDescending);
         softAssert.assertAll();
+        productPage.sort("Price Low to High");
+        List<Double> actualLowToHigh = productPage.getProductPrices();
+        List<Double> expectedLowToHigh = actualLowToHigh.stream().sorted().toList();
+        softAssert.assertEquals(actualLowToHigh, expectedLowToHigh, "Products are not sorted by Price(Low to High)");
+        productPage.sort("Price High to Low");
+        List<Double> actualHighToLow = productPage.getProductPrices();
+        List<Double> expectedHighToLow = actualHighToLow.stream().sorted().toList().reversed();
+        softAssert.assertEquals(actualHighToLow, expectedHighToLow, "Products are not sorted by Price(High to Low)");
+
     }
     @Test
     public void verifyHamburgerNavigationMenu() {

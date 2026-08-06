@@ -61,4 +61,16 @@ public class LoginTest extends BaseTest {
         softAssert.assertEquals(loginPage.getPasswordPlaceholder(), readConfigUtils.getPasswordPlaceholder(), "Password placeholder mismatch");
         softAssert.assertAll();
     }
+    @Test
+    public void verifyLogout(){
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.userLogin(readConfigUtils.getUsername(),readConfigUtils.getPassword());
+        ProductPage productPage = new ProductPage(driver);
+        String title = productPage.getValuePageTitle();
+        Assert.assertEquals(title, readConfigUtils.getTitle());
+        productPage.clickHamburgerMenu();
+        productPage.clickLogout();
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl,"https://www.saucedemo.com/","User was not logged out properly");
+    }
 }
