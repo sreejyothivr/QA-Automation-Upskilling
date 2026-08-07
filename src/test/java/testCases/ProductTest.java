@@ -121,8 +121,39 @@ public class ProductTest extends BaseTest {
 
         softAssert.assertTrue(productPage.isCloseButtonDisplayed());
         productPage.clickCloseButton();
-
+        softAssert.assertEquals(
+                productPage.getValuePageTitle(),
+                "Products",
+                "Products title is not displayed after closing the menu."
+        );
         softAssert.assertTrue(productPage.isMenuClosed());
         softAssert.assertAll();
     }
+    @Test
+    public void verifyAboutNavigation() {
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.userLogin(
+                readConfigUtils.getUsername(),
+                readConfigUtils.getPassword());
+
+        ProductPage productPage = new ProductPage(driver);
+
+        productPage.clickHamburgerMenu();
+        System.out.println(driver.getPageSource());
+
+        productPage.clickAbout();
+
+        productPage.waitForAboutPage();
+
+        System.out.println(productPage.getAboutCurrentURL());
+        System.out.println(productPage.getAboutPageTitle());
+
+        Assert.assertTrue(
+                productPage.getAboutCurrentURL().contains("saucelabs.com"));
+
+        Assert.assertTrue(
+                productPage.getAboutPageTitle().contains("Sauce"));
+    }
 }
+
