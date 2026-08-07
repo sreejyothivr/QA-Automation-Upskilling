@@ -17,6 +17,8 @@
                     <include name="verifyLoginWithInvalidUserAndInvalidPassword"/>
                     <include name="verifyLoginWithEmptyUsernameAndPassword"/>
                     <include name="verifyUsernameAndPasswordPlaceholders"/>
+
+
                 </methods>
             </class>
         </classes>
@@ -31,6 +33,8 @@
                     <include name="verifyHamburgerNavigationMenu"/>
                     <include name="verifyAllItemsNavigationToProductsPage"/>
                     <include name="verifyCloseButtonFunctionality"/>
+                    <include name="verifyAboutNavigation"/>
+
                 </methods>
             </class>
         </classes>

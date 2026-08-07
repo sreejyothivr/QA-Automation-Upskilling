@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,10 +23,10 @@ public class ProductPage {
     private By sideMenu = By.className("bm-menu-wrap");
     private By menuOptions = By.cssSelector(".bm-item.menu-item");
     private By allItems = By.id("inventory_sidebar_link");
-    private By menuButton = By.id("react-burger-menu-btn");
+    //private By menuButton = By.id("react-burger-menu-btn");
     private By closeButton = By.id("react-burger-cross-btn");
     private By logoutButton = By.id("logout_sidebar_link");
-
+    private By about = By.id("about_sidebar_link");
     public ProductPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -100,7 +101,7 @@ public class ProductPage {
     }
 
     public void clickMenuButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(hamburgerMenu)).click();
     }
     public boolean isCloseButtonDisplayed() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(closeButton)).isDisplayed();
@@ -115,5 +116,26 @@ public class ProductPage {
     }
     public void clickLogout() {
         wait.until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
+    }
+    public void clickAbout() {
+
+        WebElement aboutLink =
+                wait.until(ExpectedConditions.visibilityOfElementLocated(about));
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].click();", aboutLink);
+    }
+
+    public String getAboutCurrentURL() {
+        return driver.getCurrentUrl();
+    }
+
+    public String getAboutPageTitle() {
+        return driver.getTitle();
+    }
+    public void waitForAboutPage() {
+
+        wait.until(ExpectedConditions.urlContains("saucelabs.com"));
+
     }
 }
