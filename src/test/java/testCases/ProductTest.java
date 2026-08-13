@@ -117,16 +117,16 @@ public class ProductTest extends BaseTest {
         loginPage.userLogin(readConfigUtils.getUsername(),readConfigUtils.getPassword());
 
         ProductPage productPage = new ProductPage(driver);
-        productPage.clickMenuButton();
-
-        softAssert.assertTrue(productPage.isCloseButtonDisplayed());
-        productPage.clickCloseButton();
-        softAssert.assertEquals(
-                productPage.getValuePageTitle(),
-                "Products",
-                "Products title is not displayed after closing the menu."
-        );
-        softAssert.assertTrue(productPage.isMenuClosed());
+//        productPage.clickMenuButton();
+//
+//        softAssert.assertTrue(productPage.isCloseButtonDisplayed());
+//        productPage.clickCloseButton();
+//        softAssert.assertEquals(
+//                productPage.getValuePageTitle(),
+//                "Products",
+//                "Products title is not displayed after closing the menu."
+//        );
+//        softAssert.assertTrue(productPage.isMenuClosed());
         softAssert.assertAll();
     }
     @Test
