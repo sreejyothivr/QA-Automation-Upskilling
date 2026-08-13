@@ -159,6 +159,8 @@ public class ProductTest extends BaseTest {
         //added to verify jenkins
         Assert.assertTrue(
                 productPage.getAboutPageTitle().contains("Sauce"));
+        Assert.assertTrue(
+                productPage.getAboutPageTitle().contains("Sauce"));
     }
 }
 
