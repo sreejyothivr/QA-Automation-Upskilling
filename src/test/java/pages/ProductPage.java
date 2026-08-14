@@ -27,6 +27,10 @@ public class ProductPage {
     private By closeButton = By.id("react-burger-cross-btn");
     private By logoutButton = By.id("logout_sidebar_link");
     private By about = By.id("about_sidebar_link");
+    private By productDescription = By.className("inventory_item_desc");
+    private By productDetailName = By.className("inventory_details_name");
+    private By productDetailDescription = By.className("inventory_details_desc");
+    private By productDetailPrice = By.className("inventory_details_price");
     public ProductPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -137,5 +141,56 @@ public class ProductPage {
 
         wait.until(ExpectedConditions.urlContains("saucelabs.com"));
 
+    }
+    public void clickProduct(String productName) {
+        By product = By.xpath("//div[contains(@class,'inventory_item_name') and text()='" + productName + "']");
+        wait.until(ExpectedConditions.elementToBeClickable(product)).click();
+    }
+    public String getProductDetailName() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(productDetailName)).getText();
+    }
+    public String getProductDetailDescription() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(productDetailDescription)).getText();
+    }
+    public String getProductDetailPrice() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(productDetailPrice)).getText();
+    }
+    public String getProductName(String productName) {
+
+        By name = By.xpath(
+                "//div[@data-test='inventory-item-name' and normalize-space()=\"" + productName + "\"]"
+        );
+
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(name)
+        ).getText().trim();
+    }
+
+
+    public String getProductDescription(String productName) {
+
+        By description = By.xpath(
+                "//div[@data-test='inventory-item-name' and normalize-space()=\"" + productName + "\"]" +
+                        "/ancestor::div[@data-test='inventory-item']" +
+                        "//div[@data-test='inventory-item-desc']"
+        );
+
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(description)
+        ).getText().trim();
+    }
+
+
+    public String getProductPrice(String productName) {
+
+        By price = By.xpath(
+                "//div[@data-test='inventory-item-name' and normalize-space()=\"" + productName + "\"]" +
+                        "/ancestor::div[@data-test='inventory-item']" +
+                        "//div[@data-test='inventory-item-price']"
+        );
+
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(price)
+        ).getText().trim();
     }
 }

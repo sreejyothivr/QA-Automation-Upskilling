@@ -34,6 +34,7 @@
                     <include name="verifyAllItemsNavigationToProductsPage"/>
                     <include name="verifyCloseButtonFunctionality"/>
                     <include name="verifyAboutNavigation"/>
+                    <include name="verifyProductDetails"/>
 
                 </methods>
             </class>

@@ -10,6 +10,7 @@ import org.testng.asserts.SoftAssert;
 import pages.LoginPage;
 import pages.ProductPage;
 import testComponents.BaseTest;
+import org.testng.annotations.DataProvider;
 
 public class ProductTest extends BaseTest {
 
@@ -161,6 +162,51 @@ public class ProductTest extends BaseTest {
                 productPage.getAboutPageTitle().contains("Sauce"));
         Assert.assertTrue(
                 productPage.getAboutPageTitle().contains("Sauce"));
+    }
+    @Test(
+            dataProvider = "Products",
+            dataProviderClass = DataProviders.class
+    )
+    public void verifyProductDetails(String productName) {
+
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.userLogin(
+                readConfigUtils.getUsername(),
+                readConfigUtils.getPassword()
+        );
+
+        ProductPage productPage = new ProductPage(driver);
+
+        // Step 1: Get product details from Products page
+        String productPageName = productPage.getProductName(productName);
+        String productPageDescription = productPage.getProductDescription(productName);
+        String productPagePrice = productPage.getProductPrice(productName);
+
+        // Step 2: Click the selected product
+        productPage.clickProduct(productName);
+
+        // Step 3: Get details from Product Details page
+        String detailName = productPage.getProductDetailName();
+        String detailDescription = productPage.getProductDetailDescription();
+        String detailPrice = productPage.getProductDetailPrice();
+
+//        System.out.println("======================================");
+//        System.out.println("Product: " + productName);
+//        System.out.println("Product Page Description: [" + productPageDescription + "]");
+//        System.out.println("Detail Page Description: [" + detailDescription + "]");
+//        System.out.println("======================================");
+
+        // Step 4: Compare
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertEquals(detailName, productPageName, "Product name does not match.");
+
+        softAssert.assertEquals(detailDescription, productPageDescription, "Product description does not match.");
+
+        softAssert.assertEquals(detailPrice, productPagePrice, "Product price does not match.");
+
+        softAssert.assertAll();
     }
 }
 
