@@ -27,6 +27,10 @@ public class ProductPage {
     private By closeButton = By.id("react-burger-cross-btn");
     private By logoutButton = By.id("logout_sidebar_link");
     private By about = By.id("about_sidebar_link");
+    private By backpackAddToCart = By.id("add-to-cart-sauce-labs-backpack");
+    private By bikeLightAddToCart = By.id("add-to-cart-sauce-labs-bike-light");
+    private By boltTShirtAddToCart = By.id("add-to-cart-sauce-labs-bolt-t-shirt");
+    private By shoppingCart = By.className("shopping_cart_badge");
     public ProductPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -137,5 +141,20 @@ public class ProductPage {
 
         wait.until(ExpectedConditions.urlContains("saucelabs.com"));
 
+    }
+    public void addBackpackToCart() {
+        wait.until(ExpectedConditions.elementToBeClickable(backpackAddToCart)).click();
+    }
+
+    public void addBikeLightToCart() {
+        wait.until(ExpectedConditions.elementToBeClickable(bikeLightAddToCart)).click();
+    }
+
+    public void addBoltTShirtToCart() {
+        wait.until(ExpectedConditions.elementToBeClickable(boltTShirtAddToCart)).click();
+    }
+
+    public void clickCart() {
+        wait.until(ExpectedConditions.elementToBeClickable(shoppingCart)).click();
     }
 }
