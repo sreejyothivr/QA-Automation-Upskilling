@@ -34,10 +34,23 @@
                     <include name="verifyAllItemsNavigationToProductsPage"/>
                     <include name="verifyCloseButtonFunctionality"/>
                     <include name="verifyAboutNavigation"/>
+                    <include name="verifyProductDetails"/>
 
                 </methods>
             </class>
         </classes>
     </test>
 
+    <test name="Cart Test">
+        <classes>
+            <class name="testCases.CartTest">
+                <methods>
+                    <include name="verifyProductsRemainInCart"/>
+                    <include name="verifyCartBadgeCount"/>
+                    <include name="verifyNavigationToProductDetailsPage"/>
+                    <include name="verifyRemoveFromCart"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
