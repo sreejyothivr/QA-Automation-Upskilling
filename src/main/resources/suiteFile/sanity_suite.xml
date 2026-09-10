@@ -41,4 +41,16 @@
         </classes>
     </test>
 
+    <test name="Cart Test">
+        <classes>
+            <class name="testCases.CartTest">
+                <methods>
+                    <include name="verifyProductsRemainInCart"/>
+                    <include name="verifyCartBadgeCount"/>
+                    <include name="verifyNavigationToProductDetailsPage"/>
+                    <include name="verifyRemoveFromCart"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

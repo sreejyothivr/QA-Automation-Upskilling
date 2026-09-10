@@ -165,7 +165,7 @@ public class ProductTest extends BaseTest {
     }
     @Test(
             dataProvider = "Products",
-            dataProviderClass = DataProviders.class
+                 dataProviderClass = DataProviders.class
     )
     public void verifyProductDetails(String productName) {
 

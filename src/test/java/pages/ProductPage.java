@@ -31,6 +31,9 @@ public class ProductPage {
     private By productDetailName = By.className("inventory_details_name");
     private By productDetailDescription = By.className("inventory_details_desc");
     private By productDetailPrice = By.className("inventory_details_price");
+    private By cartIcon = By.className("shopping_cart_link");
+    private By cartBadge = By.className("shopping_cart_badge");
+
     public ProductPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -192,5 +195,40 @@ public class ProductPage {
         return wait.until(
                 ExpectedConditions.visibilityOfElementLocated(price)
         ).getText().trim();
+    }
+    public void addProductToCart(String productName) {
+
+        By addToCartButton = By.xpath(
+                "//div[@data-test='inventory-item-name' and normalize-space()=\"" + productName + "\"]" +
+                        "/ancestor::div[@data-test='inventory-item']" +
+                        "//button[contains(@id,'add-to-cart')]"
+        );
+
+        wait.until(ExpectedConditions.elementToBeClickable(addToCartButton)).click();
+    }
+    public void clickCart() {
+        wait.until(ExpectedConditions.elementToBeClickable(cartIcon)).click();
+    }
+    public int getCartBadgeCount() {
+
+        return Integer.parseInt(
+                wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(cartBadge)
+                ).getText()
+        );
+    }
+    public void removeProductFromCart(String productName) {
+
+        By removeButton = By.xpath(
+                "//div[@data-test='inventory-item-name' and normalize-space()=\"" + productName + "\"]" +
+                        "/ancestor::div[@data-test='inventory-item']" +
+                        "//button[contains(@id,'remove')]"
+        );
+
+        wait.until(ExpectedConditions.elementToBeClickable(removeButton)).click();
+    }
+    public boolean isCartBadgeDisplayed() {
+
+        return !driver.findElements(cartBadge).isEmpty();
     }
 }
